@@ -2,6 +2,7 @@ import { useReducer, useState } from "react";
 import TodoItem from "./components/TodoItem";
 import TodoForm from "./components/TodoForm";
 import Header from "./components/Header";
+import { stringify } from "postcss";
 
 // function todoReducer(state, action) {
 //   switch (action.type) {
@@ -15,13 +16,13 @@ import Header from "./components/Header";
 // dispatch({ type: "add", payload: e.target.value });
 
 function App() {
-  const [todoItems, setTodoItems] = useState([]);
+  const [todoItems, setTodoItems] = useState(innitialTodos);
 
   // const [state, dispatch] = useReducer(todoReducer, null, initializer);
 
   function handleAddTodo(todo) {
     setTodoItems([...todoItems, todo]);
-    localStorage.setItem("todoItems", JSON.stringify(todo));
+    localStorage.setItem("todoItems", JSON.stringify([...todoItems, todo]));
   }
 
   function handleIsDone(todo) {
@@ -40,7 +41,11 @@ function App() {
       return item.id !== todo.id;
     });
     setTodoItems(filteredTodoItems);
-    console.log(todoItems);
+    localStorage.setItem("todoItems", JSON.stringify(filteredTodoItems));
+  }
+  function innitialTodos() {
+    const init = localStorage.getItem("todoItems");
+    return init ? JSON.parse(init) : [];
   }
 
   return (

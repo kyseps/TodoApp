@@ -13,17 +13,20 @@ export default function TodoForm({ handleAddTodo }) {
 
   return (
     <section>
-      <form className="flex gap-6" onSubmit={handleSubmit}>
+      <form
+        className="flex justify-center items-center gap-7"
+        onSubmit={handleSubmit}
+      >
         <input
           onChange={(e) => setInput(e.target.value)}
           value={input}
           type="text"
           placeholder="Add a task"
-          className="rounded p-2 mt-5 text-xl flex-grow-3"
+          className="rounded p-2 text-xl flex-grow-3 w-full"
         />
         <button
           type="submit"
-          className="bg-rose-500 rounded text-white text-base"
+          className="bg-rose-500 rounded text-white text-base px-6 py-3"
         >
           Add
         </button>
